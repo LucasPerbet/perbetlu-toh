@@ -1,0 +1,14 @@
+.heroes button.selected {
+    background-color: black;
+    color: white;
+  }
+  
+  .heroes button.selected:hover {
+    background-color: #505050;
+    color: white;
+  }
+  
+  .heroes button.selected:active {
+    background-color: black;
+    color: white;
+  }
