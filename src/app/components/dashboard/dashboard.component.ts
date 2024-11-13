@@ -1,31 +1,30 @@
+import { NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Hero } from '../../interfaces/hero';
-import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
-
-
 @Component({
-  selector: 'app-heroes',
+  selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, NgFor, RouterLink],
-  templateUrl: './heroes.component.html',
-  styleUrl: './heroes.component.css'
+  imports: [NgFor, RouterLink],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
+export class DashboardComponent implements OnInit, OnDestroy {
 
-export class HeroesComponent implements OnInit, OnDestroy {
-  
-  constructor(private heroService: HeroService) {}
-  
   heroes: Hero[] = [];
   private heroesSubscription?: Subscription;
+
+  constructor(private heroService: HeroService){}
+
+
   
   ngOnInit(): void {
-   this.heroesSubscription = this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+   this.heroesSubscription = this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes.slice(0,5));
   }
+
 
   ngOnDestroy(): void {
     if(this.heroesSubscription){
@@ -33,4 +32,3 @@ export class HeroesComponent implements OnInit, OnDestroy {
     }
   }
 }
-
