@@ -6,9 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
 
-
-
-
 @Component({
   selector: 'app-hero-detail',
   standalone: true,

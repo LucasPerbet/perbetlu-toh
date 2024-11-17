@@ -1,36 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HeroInterface } from '../../data/heroInterface';
+import { Component, inject, OnInit } from '@angular/core';
+import { Hero } from '../../data/hero';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-heroes',
   standalone: true,
-  imports: [FormsModule, NgFor, RouterLink],
+  imports: [FormsModule, NgFor, AsyncPipe, RouterLink],
   templateUrl: './heroes.component.html',
-  styleUrl: './heroes.component.css'
+  styleUrl: './heroes.component.css',
 })
+export class HeroesComponent implements OnInit {
+  
+  hero?: Hero;
+  heroesAsync?: Observable<Hero[]>;
+  private heroService: HeroService = inject(HeroService);
 
-export class HeroesComponent implements OnInit, OnDestroy {
-  
-  constructor(private heroService: HeroService) {}
-  
-  heroes: HeroInterface[] = [];
-  private heroesSubscription?: Subscription;
-  
+  constructor() {}
+
   ngOnInit(): void {
-   this.heroesSubscription = this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    this.getHeroes();
   }
 
-  ngOnDestroy(): void {
-    if(this.heroesSubscription){
-      this.heroesSubscription?.unsubscribe()
-    }
+  getHeroes(): void {
+    this.heroesAsync = this.heroService.getHeroes();
   }
 }
-

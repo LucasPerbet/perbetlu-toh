@@ -4,6 +4,7 @@ import { collection, collectionData, doc, docData, DocumentData } from '@angular
 import { map, Observable, of  } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
