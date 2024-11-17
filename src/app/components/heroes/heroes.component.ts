@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Hero } from '../../interfaces/hero';
+import { HeroInterface } from '../../data/heroInterface';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
@@ -20,7 +20,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
   
   constructor(private heroService: HeroService) {}
   
-  heroes: Hero[] = [];
+  heroes: HeroInterface[] = [];
   private heroesSubscription?: Subscription;
   
   ngOnInit(): void {

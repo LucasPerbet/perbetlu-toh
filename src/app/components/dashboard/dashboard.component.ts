@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Hero } from '../../interfaces/hero';
+import { HeroInterface } from '../../data/heroInterface';
 import { HeroService } from '../../services/hero.service';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  heroes: Hero[] = [];
+  heroes: HeroInterface[] = [];
   private heroesSubscription?: Subscription;
 
   constructor(private heroService: HeroService){}
