@@ -1,0 +1,65 @@
+/* Component Styles */
+
+/* Section Heading */
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+    color: #005999;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Content Container */
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Space between elements */
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* Hero Links */
+.content a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007acc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content a:hover {
+    background-color: #005999;
+    transform: scale(1.05);
+}
+
+.content a:focus {
+    outline: 2px solid #005999;
+    outline-offset: 2px;
+}
+
+.content a.router-link-active {
+    background-color: #003f66;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        gap: 10px;
+    }
+
+    .content a {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}

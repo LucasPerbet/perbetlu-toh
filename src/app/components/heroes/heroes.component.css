@@ -1,14 +1,113 @@
-.heroes button.selected {
-    background-color: black;
-    color: white;
+/* Component Styles */
+
+/* Section Heading */
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 600;
+  color: #005999;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table Head */
+thead {
+  background-color: #007acc;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+thead th {
+  padding: 10px;
+  font-weight: 500;
+  text-align: left;
+}
+
+/* Table Body */
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+tbody td {
+  padding: 10px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Button Styling */
+button {
+  background-color: #007acc;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #005999;
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: 2px solid #005999;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+      font-size: 0.9rem;
   }
-  
-  .heroes button.selected:hover {
-    background-color: #505050;
-    color: white;
+
+  thead {
+      display: none;
   }
-  
-  .heroes button.selected:active {
-    background-color: black;
-    color: white;
+
+  tbody, tbody tr, tbody td {
+      display: block;
+      width: 100%;
   }
+
+  tbody tr {
+      margin-bottom: 15px;
+  }
+
+  tbody td {
+      text-align: right;
+      padding: 10px 5px;
+      position: relative;
+  }
+
+  tbody td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 5px;
+      top: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #555;
+  }
+}

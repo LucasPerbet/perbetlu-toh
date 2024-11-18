@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { environment } from '../environments/environment';
+import { environment } from './environments/environment';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
