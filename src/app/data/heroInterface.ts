@@ -4,6 +4,6 @@ export interface HeroInterface {
     attaque: number;
     esquive: number;
     degats: number;
-    PV: number;
+    pv: number;
   }
   

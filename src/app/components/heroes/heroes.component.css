@@ -1,6 +1,3 @@
-/* Component Styles */
-
-/* Section Heading */
 h2 {
   font-size: 2rem;
   text-align: center;
@@ -11,7 +8,7 @@ h2 {
   letter-spacing: 1px;
 }
 
-/* Table Styles */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -22,7 +19,7 @@ table {
   overflow: hidden;
 }
 
-/* Table Head */
+
 thead {
   background-color: #007acc;
   color: #fff;
@@ -33,13 +30,14 @@ thead {
 thead th {
   padding: 10px;
   font-weight: 500;
-  text-align: left;
+  text-align: center;
 }
 
-/* Table Body */
+
 tbody tr {
   border-bottom: 1px solid #ddd;
   transition: background-color 0.3s;
+  text-align: center;
 }
 
 tbody tr:hover {
@@ -52,7 +50,7 @@ tbody td {
   color: #333;
 }
 
-/* Button Styling */
+
 button {
   background-color: #007acc;
   color: #fff;
@@ -76,7 +74,6 @@ button:focus {
   outline-offset: 2px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   table {
       font-size: 0.9rem;

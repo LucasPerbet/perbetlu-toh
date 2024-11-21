@@ -11,5 +11,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'perbetlu-toh';
+  title = 'La tour des héros';
 }

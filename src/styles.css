@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Headings */
 h1 {
     display: flex;
     justify-content: center;
@@ -22,42 +21,11 @@ h1 {
     color: #005999;
 }
 
-/* Navigation Bar */
-nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1.5rem; 
-    font-size: 1.125rem; 
-    background-color: #fff;
-    padding: 10px 15px;
-    border-bottom: 2px solid #ddd;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Navigation Links */
-nav a {
-    text-decoration: none;
-    color: #007acc;
-    font-weight: 500;
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-/* Hover and Focus States */
-nav a:hover,
-nav a:focus {
-    color: #005999;
-    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-    outline: none;
-}
-
 .material-icons {
     font-size: 24px; /* Default size is 24px */
     vertical-align: middle; /* Aligns with text */
 }
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
     body {
         padding: 0 5%;

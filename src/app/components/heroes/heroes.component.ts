@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Hero } from '../../data/hero';
 import { FormsModule } from '@angular/forms';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-heroes',
   standalone: true,
-  imports: [FormsModule, NgFor, AsyncPipe, RouterLink],
+  imports: [FormsModule, NgFor, AsyncPipe, RouterLink, NgIf],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css',
 })

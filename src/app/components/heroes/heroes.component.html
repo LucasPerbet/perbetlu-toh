@@ -1,9 +1,14 @@
-<h2>Every Heroes</h2>
+<h2>Liste des héros</h2>
 <table>
   <thead>
     <tr>
       <th>ID</th>
       <th>Nom</th>
+      <th>Attaque</th>
+      <th>Esquive</th>
+      <th>Dégats</th>
+      <th>Point de Vie</th>
+      <th>Validité</th>
       <th>Voir le détail du héro</th>
     </tr>
   </thead>
@@ -11,7 +16,21 @@
     <tr *ngFor="let hero of heroesAsync | async">
       <td>{{ hero.id }}</td>
       <td>{{ hero.name }}</td>
+      <td>{{ hero.attaque }}</td>
+      <td>{{ hero.esquive }}</td>
+      <td>{{ hero.degats }}</td>
+      <td>{{ hero.pv }}</td>
+      <td *ngIf="hero.isValide(); else unvalid">
+        <span class="material-icons" style="color: darkgreen;">check_circle</span>
+      </td>
       <td><button routerLink="/detail/{{ hero.id }}">Détails</button></td>
     </tr>
   </tbody>
 </table>
+
+
+<ng-template #unvalid>
+  <td>
+    <span class="material-icons" style="color: darkred;">block</span>
+  </td> 
+</ng-template>

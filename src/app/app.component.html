@@ -1,6 +1,6 @@
-<h1>{{ title }}</h1>
 <nav>
-    <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</a>&nbsp;
-    <a [routerLink]="['/heroes']" routerLinkActive="router-link-active" >Heroes</a>
+    <a [routerLink]="['/']" routerLinkActive="router-link-active">{{ title }}</a>&nbsp;
+    <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Top des héros</a>&nbsp;
+    <a [routerLink]="['/heroes']" routerLinkActive="router-link-active" >Héros</a>
 </nav>
 <router-outlet></router-outlet>
