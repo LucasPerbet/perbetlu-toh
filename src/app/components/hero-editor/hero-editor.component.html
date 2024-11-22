@@ -1,1 +1,13 @@
-<p>hero-editor works!</p>
+<h2>Edite ton héro ou crée en un nouveau !</h2>
+
+<div *ngIf="hero">
+  <ul>
+    <li>{{ hero.id }}</li>
+    <li>{{ hero.name }}</li>
+    <li>{{ hero.attaque }}</li>
+    <li>{{ hero.esquive }}</li>
+    <li>{{ hero.degats }}</li>
+    <li>{{ hero.pv }}</li>
+  </ul>
+</div> 
+  

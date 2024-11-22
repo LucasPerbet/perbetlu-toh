@@ -11,5 +11,6 @@ export const routes: Routes = [
     { path: 'heroes', component: HeroesComponent },
     { path:'detail/:id', component: HeroDetailComponent },
     { path:'weapon', component: WeaponComponent },
-    { path:'hero-editor', component: HeroEditorComponent }
+    { path:'hero-editor', component: HeroEditorComponent },
+    { path:'hero-editor/:id', component: HeroEditorComponent }
 ];

@@ -9,6 +9,7 @@
       <th>Dégats</th>
       <th>Point de Vie</th>
       <th>Validité</th>
+      <th>Éditer un héro</th>
       <th>Voir le détail du héro</th>
     </tr>
   </thead>
@@ -23,10 +24,17 @@
       <td *ngIf="hero.isValide(); else unvalid">
         <span class="material-icons" style="color: darkgreen;">check_circle</span>
       </td>
+      <td><button routerLink="/hero-editor/{{ hero.id }}">Éditer</button></td>
       <td><button routerLink="/detail/{{ hero.id }}">Détails</button></td>
     </tr>
   </tbody>
 </table>
+
+<div class="redirection">
+  <button routerLink="/hero-editor/">
+    Crée ton héro <span class="material-icons">open_in_new</span>
+  </button>
+</div>
 
 
 <ng-template #unvalid>
