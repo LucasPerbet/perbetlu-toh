@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let hero of heroesAsync | async">
-      <td><input #heroId value="{{ hero.id }}" readonly></td>
+      <td><input #heroId value="{{ hero.id }}" readonly name="heroId"></td>
       <td>{{ hero.name }}</td>
       <td>{{ hero.attaque }}</td>
       <td>{{ hero.esquive }}</td>

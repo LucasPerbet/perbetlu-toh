@@ -60,12 +60,22 @@ export class HeroService {
   }
 
   private static transformationToHero(heroDocumentData: DocumentData): Hero {
-
-    // Conversion du document data en chaine JSON puis chargment de l'objet par défaut Hero
-    let heroTmp: Hero = new Hero();
-    heroTmp.fromJSON(JSON.stringify(heroDocumentData));
+    // Vérification de l'existence des données
+    if (!heroDocumentData || typeof heroDocumentData !== 'object') {
+        throw new Error('Invalid hero document data provided');
+    }
+    // Création de l'instance Hero
+    const heroTmp: Hero = new Hero();
+    // Mapping direct des propriétés si Hero possède une méthode dédiée
+    try {
+        heroTmp.fromJSON(JSON.stringify(heroDocumentData)); // Si le JSON est correct
+    } catch (error) {
+        console.error('Failed to parse hero document data:', error);
+        throw new Error('Failed to transform document data to Hero object');
+    }
     return heroTmp;
-  }
+}
+
 
   private static transformationToJSON(hero: Hero): any {
 
