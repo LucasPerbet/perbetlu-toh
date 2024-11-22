@@ -33,4 +33,8 @@ export class HeroEditorComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
   }
+
+  addHero() {
+    this.heroService.addHero();
+  }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../data/hero';
-import { collection, collectionData, deleteDoc, doc, docData, DocumentData } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, docData, DocumentData } from '@angular/fire/firestore';
 import { map, Observable, of  } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 
@@ -39,6 +39,24 @@ export class HeroService {
       const heroDocument = doc(this.firestore, HeroService.url + "/" + id);
       
       return deleteDoc(heroDocument);
+  }
+
+  addHero(): Promise<Hero> {
+    
+    const heroCollection = collection(this.firestore, HeroService.url);
+    let hero: Hero = new Hero();
+
+    let heroPromise: Promise<Hero> = new Promise( (resolve, reject) => {
+      addDoc(heroCollection, HeroService.transformationToJSON(hero)).then(
+        heroDocument => { // success
+          hero.id = heroDocument.id
+          resolve(hero);
+        },
+        msg => { // error
+          reject(msg);
+        });
+    });
+    return heroPromise;
   }
 
   private static transformationToHero(heroDocumentData: DocumentData): Hero {
