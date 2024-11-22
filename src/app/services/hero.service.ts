@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../data/hero';
-import { collection, collectionData, doc, docData, DocumentData } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docData, DocumentData } from '@angular/fire/firestore';
 import { map, Observable, of  } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 
@@ -28,11 +28,17 @@ export class HeroService {
   getHero(id: string): Observable<Hero> {
 
     const heroDocument = doc(this.firestore, HeroService.url + "/" + id);
-
+    
     return docData(heroDocument, { idField: 'id' }).pipe(
       map( (heroDocumentData: DocumentData) => {
         return HeroService.transformationToHero(heroDocumentData);
       })) as Observable<Hero>;
+    }
+    
+    deleteHero(id: string): Promise<void> {
+      const heroDocument = doc(this.firestore, HeroService.url + "/" + id);
+      
+      return deleteDoc(heroDocument);
   }
 
   private static transformationToHero(heroDocumentData: DocumentData): Hero {

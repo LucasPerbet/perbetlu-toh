@@ -50,6 +50,10 @@ tbody td {
   color: #333;
 }
 
+tbody td input {
+  all: unset;
+}
+
 
 button {
   background-color: #007acc;

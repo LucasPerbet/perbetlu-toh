@@ -10,12 +10,13 @@
       <th>Point de Vie</th>
       <th>Validité</th>
       <th>Éditer un héro</th>
+      <th>Supprimer le héro</th>
       <th>Voir le détail du héro</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let hero of heroesAsync | async">
-      <td>{{ hero.id }}</td>
+      <td><input #heroId value="{{ hero.id }}" readonly></td>
       <td>{{ hero.name }}</td>
       <td>{{ hero.attaque }}</td>
       <td>{{ hero.esquive }}</td>
@@ -24,7 +25,8 @@
       <td *ngIf="hero.isValide(); else unvalid">
         <span class="material-icons" style="color: darkgreen;">check_circle</span>
       </td>
-      <td><button routerLink="/hero-editor/{{ hero.id }}">Éditer</button></td>
+      <td><a routerLink="/hero-editor/{{ hero.id }}"><span class="material-icons" style="color: coral;">edit</span></a></td>
+      <td><button (click)="deleteHero(heroId.value)" style="background-color: white;"><span class="material-icons" style="color: darkred;">delete</span></button></td>
       <td><button routerLink="/detail/{{ hero.id }}">Détails</button></td>
     </tr>
   </tbody>
