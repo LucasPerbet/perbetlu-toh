@@ -1,6 +1,12 @@
-<h2>Top des héros</h2>
+<h2>Top 5 des héros</h2>
 <div class="content">
-  <a *ngFor="let hero of heroesAsync | async" routerLink="/detail/{{hero.id}}" routerLinkActive="router-link-active">
-    {{hero.name}}
-  </a>
+  <a *ngFor="let hero of (heroesAsync | async)?.slice(0, 5)" [routerLink]="'/detail/' + hero.id" routerLinkActive="router-link-active">
+ {{hero.name}}
+</a>
+
+</div>
+<div class="redirection">
+  <button routerLink="/hero-editor/">
+    Edite tes héros <span class="material-icons">open_in_new</span>
+  </button>
 </div>

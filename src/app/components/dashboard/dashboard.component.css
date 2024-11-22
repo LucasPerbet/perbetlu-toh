@@ -12,7 +12,7 @@ h2 {
 }
 
 /* Content Container */
-.content {
+div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -48,6 +48,36 @@ h2 {
 }
 
 .content a.router-link-active {
+    background-color: #003f66;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.redirection button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007acc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 2px #003f66;
+}
+
+.redirection button:hover {
+    background-color: #005999;
+    transform: scale(1.05);
+}
+
+.redirection button:focus {
+    outline: 2px solid #005999;
+    outline-offset: 2px;
+}
+
+.redirection button.router-link-active {
     background-color: #003f66;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }

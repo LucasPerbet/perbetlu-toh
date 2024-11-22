@@ -26,5 +26,6 @@ export class DashboardComponent implements OnInit {
 
   getHeroes(): void {
     this.heroesAsync = this.heroService.getHeroes();
+    this.heroesAsync
   }
 }
