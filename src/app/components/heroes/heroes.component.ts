@@ -5,7 +5,7 @@ import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-heroes',
@@ -34,7 +34,6 @@ export class HeroesComponent implements OnInit {
     if (confirm('Voulez-vous vraiment supprimer ce héros ?')) {
       this.heroService.deleteHero(id).then(() => {
         console.log(`Héros avec l'ID ${id} supprimé avec succès.`);
-        this.getHeroes(); // Rafraîchit la liste après suppression
       }).catch((error) => {
         console.error(`Erreur lors de la suppression du héros avec l'ID ${id}`, error);
       });

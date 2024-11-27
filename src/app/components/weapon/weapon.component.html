@@ -1,1 +1,17 @@
-<p>weapon works!</p>
+<h2>Liste des armes</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Boost d'attaque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let weapon of weaponsAsync | async">
+      <td><input #weaponId value="{{ weapon.id }}" readonly name="weaponId"></td>
+      <td>{{ weapon.name }}</td>
+      <td>{{ weapon.attack_boost }}</td>
+    </tr>
+  </tbody>
+</table>
