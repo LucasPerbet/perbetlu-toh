@@ -25,11 +25,17 @@ export class HeroEditorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    if(id != "null") {
       this.getHero();
+      console.log("jsuis la")
+    }   
+    
   }
 
   getHero(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
+    console.log(id)
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
   }
