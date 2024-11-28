@@ -2,24 +2,50 @@
 
 <form [formGroup]="heroForm">
   <label for="name">Nom</label>
-  <input id="name" type="text" formControlName="name">
-
+  <input id="name" type="text" formControlName="name" required>
+  <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+    <div *ngIf="name?.errors?.['required']">Le nom est requis.</div>
+    <div *ngIf="name?.errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</div>
+  </div>
+  
   <label for="attaque">Attaque</label>
-  <input id="attaque" type="number" formControlName="attaque">
+  <input id="attaque" type="number" formControlName="attaque" min="0" max="40">
+  <div *ngIf="attaque?.invalid && (attaque?.dirty || attaque?.touched)" class="alert alert-danger">
+    <div *ngIf="attaque?.errors?.['required']">La valeur de l'attaque est requise.</div>
+    <div *ngIf="attaque?.errors?.['min']">1 point d'attaque minimum.</div>
+  </div>
 
   <label for="esquive">Esquive</label>
   <input id="esquive" type="number" formControlName="esquive">
+  <div *ngIf="esquive?.invalid && (esquive?.dirty || esquive?.touched)" class="alert alert-danger">
+    <div *ngIf="esquive?.errors?.['required']">La valeur de l'esquive est requise.</div>
+    <div *ngIf="esquive?.errors?.['min']">1 point d'esquive minimum.</div>
+  </div>
 
   <label for="degats">Dégâts</label>
   <input id="degats" type="number" formControlName="degats">
+  <div *ngIf="degats?.invalid && (degats?.dirty || degats?.touched)" class="alert alert-danger">
+    <div *ngIf="degats?.errors?.['required']">La valeur des dégats est requise.</div>
+    <div *ngIf="degats?.errors?.['min']">1 point de dégat minimum.</div>
+  </div>
 
   <label for="pv">PV</label>
   <input id="pv" type="number" formControlName="pv">
+  <div *ngIf="pv?.invalid && (pv?.dirty || pv?.touched)" class="alert alert-danger">
+    <div *ngIf="pv?.errors?.['required']">La valeur des points de vie est requise.</div>
+    <div *ngIf="pv?.errors?.['min']">1 point de vie minimum.</div>
+  </div>
 
-  <!-- Change l'action et le texte du bouton en fonction du contexte -->
-  <button type="button" (click)="hero ? updateHero() : addHero()">
+  <button type="button" [disabled]="heroForm.invalid" (click)="hero ? updateHero() : addHero()">
     {{ hero ? 'Modifier' : 'Créer' }}
   </button>
+  <div *ngIf="heroForm.errors?.['totalExceeds']" class="alert alert-danger">
+    La somme des valeurs (attaque, esquive, dégâts, PV) ne doit pas dépasser 40.
+  </div>  
+  <div *ngIf="heroForm.invalid" class="alert alert-warning">
+    Tous les champs doivent être remplis correctement avant de soumettre.
+  </div>  
+  
 </form>
 
 

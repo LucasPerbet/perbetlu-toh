@@ -5,12 +5,13 @@ import { Hero } from '../../data/hero';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Location, NgIf } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CustomValidators } from '../../data/customValidators';
 
 @Component({
   selector: 'app-hero-editor',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgIf,ReactiveFormsModule],
   templateUrl: './hero-editor.component.html',
   styleUrl: './hero-editor.component.css'
 })
@@ -20,15 +21,52 @@ export class HeroEditorComponent implements OnInit {
   hero: HeroInterface | undefined;
   heroesAsync?: Observable<Hero[]>;
   private heroService: HeroService = inject(HeroService);
-  heroForm = new FormGroup({
-    name: new FormControl<string>(''), // Type string
-    attaque: new FormControl<number | null>(null), // Type number
-    esquive: new FormControl<number | null>(null),
-    degats: new FormControl<number | null>(null),
-    pv: new FormControl<number | null>(null),
-  });
+  private customValidators = new CustomValidators();
   
+  heroForm = new FormGroup({
+    name: new FormControl<string>('',[
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    attaque: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    
+    esquive: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    degats: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+    pv: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(1),
+    ]),
+  },
+  { validators: this.customValidators.totalNotExceeding(40)}
+);
 
+  get name() {
+    return this.heroForm.get('name');
+  }
+  
+  get attaque() {
+    return this.heroForm.get('attaque');
+  }
+
+  get esquive() {
+    return this.heroForm.get('esquive');
+  }
+
+  get degats() {
+    return this.heroForm.get('degats');
+  }
+  get pv() {
+    return this.heroForm.get('pv');
+  }
 
   constructor(
     private route: ActivatedRoute
