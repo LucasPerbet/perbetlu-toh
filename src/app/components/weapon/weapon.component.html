@@ -5,6 +5,8 @@
       <th>ID</th>
       <th>Nom</th>
       <th>Boost d'attaque</th>
+      <th>Éditer une arme</th>
+      <th>Supprimer une arme</th>
     </tr>
   </thead>
   <tbody>
@@ -12,11 +14,13 @@
       <td><input #weaponId value="{{ weapon.id }}" readonly name="weaponId"></td>
       <td>{{ weapon.name }}</td>
       <td>{{ weapon.attack_boost }}</td>
+      <td><a routerLink="/weapon-editor/{{ weapon.id }}"><span class="material-icons" style="color: coral;">edit</span></a></td>
+      <td><button (click)="deleteWeapon(weaponId.value)" style="background-color: white;"><span class="material-icons" style="color: darkred;">delete</span></button></td>
     </tr>
   </tbody>
 </table>
 <div class="redirection">
-  <button routerLink="/hero-editor/">
+  <button routerLink="/weapon-editor/">
     Crée ton arme <span class="material-icons">open_in_new</span>
   </button>
 </div>

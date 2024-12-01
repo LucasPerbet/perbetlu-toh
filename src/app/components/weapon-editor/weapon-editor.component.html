@@ -1,0 +1,40 @@
+<!-- Alerte de succès en popup -->
+<div *ngIf="successMessage" class="alert-popup">
+    <div class="alert-popup-content">
+      <p>{{ successMessage }}</p>
+    </div>
+  </div>
+  
+  <h2>Edite ton arme ou crée en une nouvelle !</h2>
+  
+  <form [formGroup]="weaponForm">
+    <label for="name">Nom</label>
+    <input id="name" type="text" formControlName="name" required>
+    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+      <div *ngIf="name?.errors?.['required']">Le nom est requis.</div>
+      <div *ngIf="name?.errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</div>
+    </div>
+    
+    <label for="attack_boost">Attaque boost</label>
+    <input id="attack_boost" type="number" formControlName="attack_boost" min="0" max="50">
+    <div *ngIf="attack_boost?.invalid && (attack_boost?.dirty || attack_boost?.touched)" class="alert alert-danger">
+      <div *ngIf="attack_boost?.errors?.['required']">La valeur de l'attaque est requise.</div>
+      <div *ngIf="attack_boost?.errors?.['min']">1 point d'attaque minimum.</div>
+      <div *ngIf="attack_boost?.errors?.['max']">50 points d'attaque maximum.</div>
+    </div>
+
+    <button type="button" [disabled]="weaponForm.invalid" (click)="weapon ? updateWeapon() : addWeapon()">
+      {{ weapon ? 'Modifier' : 'Créer' }}
+    </button>
+    <div *ngIf="weaponForm.errors?.['totalExceeds']" class="alert alert-danger">
+      La somme des valeurs (attaque, esquive, dégâts, PV) ne doit pas dépasser 40.
+    </div>  
+    <div *ngIf="weaponForm.invalid" class="alert alert-warning">
+      Tous les champs doivent être remplis correctement avant de soumettre.
+    </div>  
+    
+  </form>
+  
+  
+  
+  

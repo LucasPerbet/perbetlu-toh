@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { HeroService } from '../../services/hero.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class HeroesComponent implements OnInit {
   heroesAsync?: Observable<Hero[]>;
   private heroService: HeroService = inject(HeroService);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.getHeroes();
@@ -30,13 +30,15 @@ export class HeroesComponent implements OnInit {
     this.heroesAsync = this.heroService.getHeroes();
   }
 
-  deleteHero(id: string): void {
+  async deleteHero(id: string): Promise<void> {
     if (confirm('Voulez-vous vraiment supprimer ce héros ?')) {
-      this.heroService.deleteHero(id).then(() => {
+      try {
+        await this.heroService.deleteHero(id);
         console.log(`Héros avec l'ID ${id} supprimé avec succès.`);
-      }).catch((error) => {
+      } catch (error) {
         console.error(`Erreur lors de la suppression du héros avec l'ID ${id}`, error);
-      });
+      }
     }
   }
+  
 }
