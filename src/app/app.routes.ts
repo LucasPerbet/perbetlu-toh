@@ -5,6 +5,7 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 import { HeroEditorComponent } from './components/hero-editor/hero-editor.component';
 import { WeaponComponent } from './components/weapon/weapon.component';
 import { WeaponEditorComponent } from './components/weapon-editor/weapon-editor.component';
+import { GlobalEditorComponent } from './components/global-editor/global-editor.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,4 +17,5 @@ export const routes: Routes = [
     { path:'hero-editor/:id', component: HeroEditorComponent },
     { path:'weapon-editor', component: WeaponEditorComponent },
     { path:'weapon-editor/:id', component: WeaponEditorComponent },
+    { path:'global-editor', component: GlobalEditorComponent },
 ];
