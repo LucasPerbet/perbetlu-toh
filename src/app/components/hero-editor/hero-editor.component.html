@@ -1,3 +1,10 @@
+<!-- Alerte de succès en popup -->
+<div *ngIf="successMessage" class="alert-popup">
+  <div class="alert-popup-content">
+    <p>{{ successMessage }}</p>
+  </div>
+</div>
+
 <h2>Edite ton héro ou crée en un nouveau !</h2>
 
 <form [formGroup]="heroForm">

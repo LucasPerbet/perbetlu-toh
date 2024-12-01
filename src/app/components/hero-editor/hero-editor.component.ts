@@ -1,9 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HeroService } from '../../services/hero.service';
-import { HeroInterface } from '../../data/heroInterface';
 import { Hero } from '../../data/hero';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location, NgIf } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomValidators } from '../../data/customValidators';
@@ -11,20 +10,19 @@ import { CustomValidators } from '../../data/customValidators';
 @Component({
   selector: 'app-hero-editor',
   standalone: true,
-  imports: [NgIf,ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule],
   templateUrl: './hero-editor.component.html',
-  styleUrl: './hero-editor.component.css'
+  styleUrls: ['./hero-editor.component.css']
 })
 export class HeroEditorComponent implements OnInit {
-
-
-  hero: HeroInterface | undefined;
+  hero: Hero | undefined;
   heroesAsync?: Observable<Hero[]>;
   private heroService: HeroService = inject(HeroService);
   private customValidators = new CustomValidators();
-  
+  successMessage: string = '';
+
   heroForm = new FormGroup({
-    name: new FormControl<string>('',[
+    name: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(3),
     ]),
@@ -32,7 +30,6 @@ export class HeroEditorComponent implements OnInit {
       Validators.required,
       Validators.min(1),
     ]),
-    
     esquive: new FormControl<number | null>(null, [
       Validators.required,
       Validators.min(1),
@@ -45,14 +42,12 @@ export class HeroEditorComponent implements OnInit {
       Validators.required,
       Validators.min(1),
     ]),
-  },
-  { validators: this.customValidators.totalNotExceeding(40)}
-);
+  }, { validators: this.customValidators.totalNotExceeding(40) });
 
   get name() {
     return this.heroForm.get('name');
   }
-  
+
   get attaque() {
     return this.heroForm.get('attaque');
   }
@@ -64,13 +59,12 @@ export class HeroEditorComponent implements OnInit {
   get degats() {
     return this.heroForm.get('degats');
   }
+
   get pv() {
     return this.heroForm.get('pv');
   }
 
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -83,7 +77,6 @@ export class HeroEditorComponent implements OnInit {
       this.heroForm.reset(); // Initialise le formulaire avec des champs vides
     }
   }
-  
 
   getHero(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
@@ -104,12 +97,55 @@ export class HeroEditorComponent implements OnInit {
     });
   }
 
-  addHero() {
-    this.heroService.addHero();
-  }
+// Méthode qui gère l'ajout d'un héros
+async addHero() {
+  const newHero = new Hero(
+    "",  // ID sera généré lors de l'ajout dans Firestore
+    this.heroForm.value.name ?? "",  // Conversion de `null` ou `undefined` en chaîne vide
+    this.heroForm.value.attaque ?? 0,
+    this.heroForm.value.esquive ?? 0,
+    this.heroForm.value.degats ?? 0,
+    this.heroForm.value.pv ?? 0
+  );
+  
+  try {
+    await this.heroService.addHero(newHero);
+    this.successMessage = "Héros créé avec succès !";  // Affichage du message de succès
 
-  updateHero() {
-    this.heroService.updateHero();
+    // Redirection après l'ajout du héros
+    setTimeout(() => {
+      this.router.navigate(['/heroes']);  // Remplace '/heroes' par le chemin de ta liste de héros
+    }, 1500);  // Redirige après 2 secondes pour laisser le temps à l'alerte de s'afficher
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout du héros:', error);
   }
 }
 
+
+// Méthode qui gère la mise à jour d'un héros existant
+async updateHero() {
+  if (this.hero) {
+    const updatedHero = new Hero(
+      this.hero.id!,  // Utilise l'ID du héros existant
+      this.heroForm.value.name ?? "",  // Conversion de `null` ou `undefined` en chaîne vide
+      this.heroForm.value.attaque ?? 0,
+      this.heroForm.value.esquive ?? 0,
+      this.heroForm.value.degats ?? 0,
+      this.heroForm.value.pv ?? 0
+    );
+  
+    try {
+      await this.heroService.updateHero(updatedHero);
+      this.successMessage = "Héros mis à jour avec succès !";  // Affichage du message de succès
+
+      // Redirection après la mise à jour du héros
+      setTimeout(() => {
+        this.router.navigate(['/heroes']);  // Redirige vers la liste des héros
+      }, 1500);  // Redirige après 2 secondes pour laisser le temps à l'alerte de s'afficher
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour du héros:', error);
+    }
+  }
+}
+
+}

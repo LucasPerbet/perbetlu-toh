@@ -3,6 +3,9 @@ h2 {
     color: #007acc;;
 }
 
+div {
+  text-align: center;
+}
 form {
     width: 95%;
     max-width: 600px;
@@ -60,3 +63,62 @@ form {
     outline: 2px solid #005999;
     outline-offset: 2px;
   }
+
+  .alert-danger {
+    color: darkred;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  /* Style pour la popup de succès */
+.alert-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.alert-popup-content {
+  background-color: #4CAF50; /* Vert pour succès */
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 80%; /* Largeur relative à la taille de l'écran */
+  max-width: 400px; /* Largeur maximale */
+}
+
+.alert-popup p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Animation d'apparition de la popup */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animation de disparition de la popup (utilisée pour le timeout) */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}

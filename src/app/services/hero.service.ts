@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../data/hero';
-import { addDoc, collection, collectionData, deleteDoc, doc, docData, DocumentData } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, docData, DocumentData, setDoc } from '@angular/fire/firestore';
 import { map, Observable, of  } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 
@@ -85,15 +85,36 @@ async deleteHero(id: string): Promise<void> {
  * @returns {Promise<Hero>} - A promise that resolves to the newly created `Hero` 
  *                             instance, including its generated `id` from Firestore.
  */
-addHero() {
+ async addHero(hero: Hero): Promise<Hero> {
+  const heroCollection = collection(this.firestore, HeroService.url);
 
-  console.log("add");
+  try {
+    // Ajoute un document dans la collection
+    const docRef = await addDoc(heroCollection, HeroService.transformationToJSON(hero));
+    
+    // Ajoute l'ID généré par Firestore à l'objet hero
+    hero.id = docRef.id;
+
+    // Retourne le héros avec l'ID ajouté
+    return hero;
+  } catch (error) {
+    console.error('Error adding hero: ', error);
+    throw error; // Lève l'exception si une erreur se produit
+  }
 }
 
+async updateHero(hero: Hero): Promise<void> {
+  const heroDocument = doc(this.firestore, `${HeroService.url}/${hero.id}`);
 
-updateHero() {
-  console.log("Update");
+  try {
+    // Mise à jour du document avec le héros
+    await setDoc(heroDocument, HeroService.transformationToJSON(hero), { merge: true });
+  } catch (error) {
+    console.error('Error updating hero: ', error);
+    throw error; // Lève l'exception si une erreur se produit
+  }
 }
+
   
 /**
  * This private method takes raw document data from Firebase and converts it into 
