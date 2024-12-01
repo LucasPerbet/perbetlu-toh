@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
+      <th hidden>ID</th>
       <th>Nom</th>
       <th>Boost d'attaque</th>
       <th>Éditer une arme</th>
@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let weapon of weaponsAsync | async">
-      <td><input #weaponId value="{{ weapon.id }}" readonly name="weaponId"></td>
+      <td hidden><input #weaponId value="{{ weapon.id }}" readonly name="weaponId"></td>
       <td>{{ weapon.name }}</td>
       <td>{{ weapon.attack_boost }}</td>
       <td><a routerLink="/weapon-editor/{{ weapon.id }}"><span class="material-icons" style="color: coral;">edit</span></a></td>
