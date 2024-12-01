@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HeroService } from '../../services/hero.service';
 import { Hero } from '../../data/hero';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location, NgIf } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -70,7 +70,7 @@ export class HeroEditorComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     
     if (id && id !== "null") {
-      // Cas d'édition : Charger les données du héros existant
+      // Cas d'édition : Charger les données du héro existant
       this.getHero();
     } else {
       // Cas de création : Formulaire vide
@@ -78,13 +78,15 @@ export class HeroEditorComponent implements OnInit {
     }
   }
 
-  getHero(): void {
+  async getHero(): Promise<void> {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    console.log(id);
-    this.heroService.getHero(id).subscribe(hero => {
+  
+    try {
+      // Convertit l'Observable en Promesse en utilisant firstValueFrom
+      const hero = await firstValueFrom(this.heroService.getHero(id));
       this.hero = hero;
   
-      // Met à jour le formulaire avec les données du héros
+      // Met à jour le formulaire avec les données du héro
       if (this.hero) {
         this.heroForm.patchValue({
           name: this.hero.name,
@@ -94,10 +96,12 @@ export class HeroEditorComponent implements OnInit {
           pv: this.hero.pv,
         });
       }
-    });
+    } catch (error) {
+      console.error('Erreur lors de la récupération du héro', error);
+    }
   }
 
-// Méthode qui gère l'ajout d'un héros
+// Méthode qui gère l'ajout d'un héro
 async addHero() {
   const newHero = new Hero(
     "",  // ID sera généré lors de l'ajout dans Firestore
@@ -110,23 +114,23 @@ async addHero() {
   
   try {
     await this.heroService.addHero(newHero);
-    this.successMessage = "Héros créé avec succès !";  // Affichage du message de succès
+    this.successMessage = "Héro créé avec succès !";  // Affichage du message de succès
 
-    // Redirection après l'ajout du héros
+    // Redirection après l'ajout du héro
     setTimeout(() => {
-      this.router.navigate(['/heroes']);  // Remplace '/heroes' par le chemin de ta liste de héros
+      this.router.navigate(['/heroes']);  
     }, 1500);  // Redirige après 2 secondes pour laisser le temps à l'alerte de s'afficher
   } catch (error) {
-    console.error('Erreur lors de l\'ajout du héros:', error);
+    console.error('Erreur lors de l\'ajout du héro:', error);
   }
 }
 
 
-// Méthode qui gère la mise à jour d'un héros existant
+// Méthode qui gère la mise à jour d'un héro existant
 async updateHero() {
   if (this.hero) {
     const updatedHero = new Hero(
-      this.hero.id!,  // Utilise l'ID du héros existant
+      this.hero.id!,  // Utilise l'ID du héro existant
       this.heroForm.value.name ?? "",  // Conversion de `null` ou `undefined` en chaîne vide
       this.heroForm.value.attaque ?? 0,
       this.heroForm.value.esquive ?? 0,
@@ -136,14 +140,14 @@ async updateHero() {
   
     try {
       await this.heroService.updateHero(updatedHero);
-      this.successMessage = "Héros mis à jour avec succès !";  // Affichage du message de succès
+      this.successMessage = "Héro mis à jour avec succès !";  // Affichage du message de succès
 
-      // Redirection après la mise à jour du héros
+      // Redirection après la mise à jour du héro
       setTimeout(() => {
         this.router.navigate(['/heroes']);  // Redirige vers la liste des héros
       }, 1500);  // Redirige après 2 secondes pour laisser le temps à l'alerte de s'afficher
     } catch (error) {
-      console.error('Erreur lors de la mise à jour du héros:', error);
+      console.error('Erreur lors de la mise à jour du héro:', error);
     }
   }
 }
