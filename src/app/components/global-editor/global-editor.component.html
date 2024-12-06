@@ -1,1 +1,15 @@
-<p>global-editor works!</p>
+
+    <div>
+        <label>Sélectionne le héro à équiper</label>
+        <select>
+            <option *ngFor="let hero of heroesAsync | async" value="{{hero.id}}" id="optionHero">{{hero.name}}</option>
+        </select>
+
+        <label>Sélectionne l'arme à associer à ce héro</label>
+        <select>
+            <option *ngFor="let weapon of weaponsAsync | async" value="{{weapon.id}}" id="optionWeapon">{{weapon.name}}</option>
+        </select>
+
+        <button (click)="assignWeaponToHero()">Associer</button>
+    </div>
+
