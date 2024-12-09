@@ -1,4 +1,28 @@
 <h2>Liste des armes</h2>
+
+<div class="filters">
+  <label>
+    Filtrer par nom :
+    <input type="text" [(ngModel)]="filterName" placeholder="Nom de l'arme" />
+  </label>
+  <label>
+    Trier par :
+    <select [(ngModel)]="sortBy">
+      <option value="">Aucun</option>
+      <option value="name">Nom</option>
+      <option value="attack_boost">Boost d'attaque</option>
+    </select>
+  </label>
+  <label>
+    Ordre :
+    <select [(ngModel)]="sortOrder">
+      <option value="asc">Ascendant</option>
+      <option value="desc">Descendant</option>
+    </select>
+  </label>
+  <button class="apply-filters" (click)="applyFilters()"><span class="material-icons">search</span></button>&nbsp;
+  <button  class="apply-filters" (click)="resetFilters()" class="reset-button">Reset</button>
+</div>
 <table>
   <thead>
     <tr>
@@ -10,7 +34,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let weapon of weaponsAsync | async">
+    <tr *ngFor="let weapon of displayedWeapon | async">
       <td hidden><input #weaponId value="{{ weapon.id }}" readonly name="weaponId"></td>
       <td>{{ weapon.name }}</td>
       <td>{{ weapon.attack_boost }}</td>

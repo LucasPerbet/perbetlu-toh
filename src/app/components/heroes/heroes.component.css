@@ -1,3 +1,4 @@
+/* Titre */
 h2 {
   font-size: 2rem;
   text-align: center;
@@ -8,7 +9,7 @@ h2 {
   letter-spacing: 1px;
 }
 
-
+/* Tableau */
 table {
   width: 95%;
   border-collapse: collapse;
@@ -18,7 +19,6 @@ table {
   border-radius: 8px;
   overflow: hidden;
 }
-
 
 thead {
   background-color: #007acc;
@@ -32,7 +32,6 @@ thead th {
   font-weight: 500;
   text-align: center;
 }
-
 
 tbody tr {
   border-bottom: 1px solid #ddd;
@@ -54,7 +53,7 @@ tbody td input {
   all: unset;
 }
 
-
+/* Boutons */
 button {
   background-color: #007acc;
   color: #fff;
@@ -82,37 +81,93 @@ button:focus {
   text-align: center;
 }
 
+/* Filtres */
+.filters {
+  width: fit-content;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #333;
+  transition: border-color 0.3s;
+  margin-right: 8px;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #007acc;
+  outline: none;
+}
+
+.filters select {
+  text-transform: capitalize;
+}
+
+/* Responsiveness */
 @media (max-width: 768px) {
   table {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
   }
 
   thead {
-      display: none;
+    display: none;
   }
 
-  tbody, tbody tr, tbody td {
-      display: block;
-      width: 100%;
+  tbody,
+  tbody tr,
+  tbody td {
+    display: block;
+    width: 100%;
   }
 
   tbody tr {
-      margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   tbody td {
-      text-align: right;
-      padding: 10px 5px;
-      position: relative;
+    text-align: right;
+    padding: 10px 5px;
+    position: relative;
   }
 
   tbody td::before {
-      content: attr(data-label);
-      position: absolute;
-      left: 5px;
-      top: 10px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #555;
+    content: attr(data-label);
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555;
   }
+
+  .filters {
+    flex-direction: column;
+
+  }
+
+  .filters label {
+    width: 100%;
+  }
+
 }
