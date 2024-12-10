@@ -3,7 +3,7 @@
 <div class="filters">
   <label>
     Filtrer par nom :
-    <input type="text" [(ngModel)]="filterName" placeholder="Nom du héro" />
+    <input type="text" [(ngModel)]="filterName" placeholder="Nom du héros" />
   </label>
   <label>
     Trier par :
@@ -11,6 +11,7 @@
       <option value="">Aucun</option>
       <option value="name">Nom</option>
       <option value="attaque">Attaque</option>
+      <option value="totalAttack">Attaque Totale</option>
       <option value="esquive">Esquive</option>
       <option value="degats">Dégâts</option>
       <option value="pv">Points de vie</option>
@@ -23,54 +24,68 @@
       <option value="desc">Descendant</option>
     </select>
   </label>
-  <button class="apply-filters" (click)="applyFilters()"><span class="material-icons">search</span></button>&nbsp;
-  <button  class="apply-filters" (click)="resetFilters()" class="reset-button">Reset</button>
+  <button class="apply-filters" (click)="applyFilters()">
+    <span class="material-icons">search</span>
+  </button>
+  <button class="reset-button" (click)="resetFilters()">Reset</button>
 </div>
-
-
 
 <table>
   <thead>
     <tr>
       <th hidden>ID</th>
       <th>Nom</th>
-      <th>Attaque</th>
+      <th>Attaque + <span style="color: darkorange;">Arme</span></th>
       <th>Esquive</th>
-      <th>Dégats</th>
+      <th>Dégâts</th>
       <th>Point de Vie</th>
       <th>Validité</th>
-      <th>Éditer un héro</th>
-      <th>Supprimer le héro</th>
-      <th>Voir le détail du héro</th>
+      <th>Éditer un héros</th>
+      <th>Supprimer le héros</th>
+      <th>Voir le détail du héros</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let hero of displayedHeroes | async">
-      <td hidden><input #heroId value="{{ hero.id }}" readonly name="heroId"></td>
+      <td hidden><input #heroId value="{{ hero.id }}" readonly name="heroId" /></td>
       <td>{{ hero.name }}</td>
-      <td>{{ hero.attaque }}</td>
+      <td>
+        {{ hero.attaque }}
+        <span *ngIf="hero.weapon" style="color: darkorange;">
+          + ({{ hero.weapon.attack_boost }})
+        </span>
+        <span *ngIf="hero.weapon">(Total: {{ hero.totalAttack }})</span>
+      </td>
       <td>{{ hero.esquive }}</td>
       <td>{{ hero.degats }}</td>
       <td>{{ hero.pv }}</td>
       <td *ngIf="hero.isValide(); else unvalid">
         <span class="material-icons" style="color: darkgreen;">check_circle</span>
       </td>
-      <td><a routerLink="/hero-editor/{{ hero.id }}"><span class="material-icons" style="color: coral;">edit</span></a></td>
-      <td><button (click)="deleteHero(heroId.value)" style="background-color: white;"><span class="material-icons" style="color: darkred;">delete</span></button></td>
-      <td><button routerLink="/detail/{{ hero.id }}">Détails</button></td>
+      <ng-template #unvalid>
+        <td>
+          <span class="material-icons" style="color: darkred;">block</span>
+        </td>
+      </ng-template>
+      <td>
+        <a [routerLink]="'/hero-editor/' + hero.id">
+          <span class="material-icons" style="color: coral;">edit</span>
+        </a>
+      </td>
+      <td>
+        <button (click)="deleteHero(heroId.value)" style="background-color: white;">
+          <span class="material-icons" style="color: darkred;">delete</span>
+        </button>
+      </td>
+      <td>
+        <button [routerLink]="'/detail/' + hero.id">Détails</button>
+      </td>
     </tr>
   </tbody>
 </table>
 
 <div class="redirection">
-  <button routerLink="/hero-editor/">
-    Crée ton héro <span class="material-icons">open_in_new</span>
+  <button [routerLink]="'/hero-editor/'">
+    Crée ton héros <span class="material-icons">open_in_new</span>
   </button>
 </div>
-
-
-<ng-template #unvalid>
-  <td>
-    <span class="material-icons" style="color: darkred;">block</span>
-  </td> 
-</ng-template>
