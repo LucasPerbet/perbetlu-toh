@@ -32,7 +32,11 @@
     <div *ngIf="weaponForm.invalid" class="alert alert-warning">
       Tous les champs doivent être remplis correctement avant de soumettre.
     </div>  
-    
+    <div>
+      <button type="button" (click)="goBack()">
+        <span class="material-icons icon-white" style="color:white;">arrow_back</span>
+      </button>
+    </div>
   </form>
   
   

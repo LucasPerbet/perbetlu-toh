@@ -44,6 +44,7 @@ export class HeroEditorComponent implements OnInit {
     ]),
   }, { validators: this.customValidators.totalNotExceeding(40) });
 
+
   get name() {
     return this.heroForm.get('name');
   }
@@ -64,7 +65,10 @@ export class HeroEditorComponent implements OnInit {
     return this.heroForm.get('pv');
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private location: Location) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -150,6 +154,10 @@ async updateHero() {
       console.error('Erreur lors de la mise à jour du héro:', error);
     }
   }
+}
+
+goBack(): void {
+  this.location.back();
 }
 
 }

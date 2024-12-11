@@ -5,6 +5,7 @@ export class Weapon implements WeaponInterface {
     id: string | undefined;
     name: string;
     attack_boost: number;
+    
 
     constructor(id: string = "id_test", name: string = "Faux", attack_boost: number = 10){
         this.id = id;

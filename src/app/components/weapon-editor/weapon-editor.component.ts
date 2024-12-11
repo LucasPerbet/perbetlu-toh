@@ -5,6 +5,7 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { WeaponService } from '../../services/weapon.service';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-weapon-editor',
@@ -41,7 +42,7 @@ export class WeaponEditorComponent implements OnInit{
   }
 
   
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router,   private location: Location) {}
 
   ngOnInit():void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -121,6 +122,8 @@ async updateWeapon() {
   }
 }
 
-
+goBack(): void {
+  this.location.back();
+}
 
 }

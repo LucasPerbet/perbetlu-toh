@@ -1,9 +1,25 @@
 <div class="content-hero"   *ngIf="hero">
-  <h2>{{hero.name}} Details</h2>
-  <div><span>id: </span>{{hero.id}}</div>
+  <h2>Details de {{hero.name}} </h2>
+
   <div>
-    <label for="hero-name">Hero name: </label>
-    <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name" [readOnly]="true"/>
+    <label for="hero-name">Nom: </label>
+    <input id="hero-name" [(ngModel)]="hero.name"  [readOnly]="true"/>
+  </div>
+  <div>
+    <label for="hero-name">Attaque: </label>
+    <input id="hero-name" [(ngModel)]="hero.attaque" [readOnly]="true"/>
+  </div>
+  <div>
+    <label for="hero-name">Esquive: </label>
+    <input id="hero-name" [(ngModel)]="hero.esquive" [readOnly]="true"/>
+  </div>
+  <div>
+    <label for="hero-name">Dégats: </label>
+    <input id="hero-name" [(ngModel)]="hero.degats" [readOnly]="true"/>
+  </div>
+  <div>
+    <label for="hero-name">Point de vie: </label>
+    <input id="hero-name" [(ngModel)]="hero.pv" [readOnly]="true"/>
   </div>
   <button type="button" (click)="goBack()">
     <span class="material-icons icon-white" style="color:white;">arrow_back</span>

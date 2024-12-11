@@ -1,0 +1,18 @@
+<h2>Associe un héro avec une arme !</h2>
+<div>
+    <label>Sélectionne le héro à équiper</label>
+    <select [(ngModel)]="selectedHeroId">
+        <option *ngFor="let hero of heroesAsync | async" [value]="hero.id">{{hero.name}}</option>
+    </select>
+</div>
+
+<div>
+    <label>Sélectionne l'arme à associer à ce héro</label>
+    <select [(ngModel)]="selectedWeaponId">
+        <option *ngFor="let weapon of weaponsAsync | async" [value]="weapon.id">{{weapon.name}}</option>
+    </select>
+</div>
+
+<div>
+    <button (click)="onAssignWeapon()" [disabled]="!selectedHeroId || !selectedWeaponId">Associer</button>
+</div>
