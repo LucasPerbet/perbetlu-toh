@@ -21,7 +21,7 @@ Une application Angular permettant de gérer une liste de héros et d'armes avec
 
 L'application **Tower of heroes** est conçue pour gérer facilement des listes de héros et d'armes. Cette application utilise Angular pour l'interface utilisateur et un service centralisé pour gérer les données des héros.
 
-Une vidéo de présentation est disponible associer à ce projet.
+Une vidéo de présentation est disponible : https://youtu.be/F-NwvYf-XCc 
 
 ---
 
